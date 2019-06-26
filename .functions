@@ -1,0 +1,85 @@
+function chrome {
+    /usr/bin/open -a /Applications/Google\ Chrome.app $1
+}
+
+function git_fetch_all {
+    echo "Refreshing..."
+
+    gfa --tags -q
+}
+
+function refresh_branch {
+    echo "Updating $1..."
+
+    git co -q $1
+    git pull -q
+}
+
+function git_refresh_all_but_current {
+    # Refresh branches and tags, pruning as well
+    git_fetch_all
+
+    current_branch=$(current_branch)
+
+    for branch in $(git branch | grep -v $current_branch); do
+        refresh_branch $branch
+    done
+}
+
+function git_refresh_all {
+    current=$(current_branch)
+
+    git_refresh_all_but_current
+
+    refresh_branch $current
+}
+
+function get_pr {
+    message=$(git push -u 2>&1)
+
+    if [ $? -eq 0 ]; then
+        chrome $(git remote -v | grep '(push)' | awk '{print $2 }' | sed -E 's/.git//')"/compare/"$(current_branch)
+    else
+        echo $message
+    fi
+}
+
+function git_delete_branch {
+    current=$(current_branch)
+
+    git_refresh_all_but_current
+
+    git co -q $1
+    git branch -D $current
+}
+
+DNS_DIR='/Library/Application Support/OpenDNS Roaming Client/'
+
+function sudo_backup_file {
+    sudo mv $1 $1"-bak"
+}
+
+function sudo_restore_file {
+    sudo mv $1"-bak" $1
+}
+
+function turn_dns_off {
+    cd $DNS_DIR 
+
+    sudo mv dnscrypt-proxy dnscrypt-proxy-bak
+    sudo mv dns-updater dns-updater-bak
+
+    sudo killall dns-updater dnscrypt-proxy
+
+    cd -
+}
+
+function turn_dns_on {
+    cd $DNS_DIR
+
+    sudo mv dnscrypt-proxy-bak dnscrypt-proxy
+    sudo mv dns-updater-bak dns-updater
+
+    cd -
+}
+

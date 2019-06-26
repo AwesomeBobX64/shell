@@ -1,0 +1,36 @@
+[core]
+    excludesfile = /Users/robert.vandell/.gitignore_global
+    editor = vi
+[user]
+	name = Bob Van Dell
+	email = robert.vandell@creditkarma.com
+[merge]
+    tool = opendiff
+[push]
+	default = current
+[pull]
+    rebase = true
+[rerere]
+    enabled = true
+[colur]
+    ui = true
+[alias]
+    s = status -s
+    lg = log --oneline --decorate=no --graph
+    co = checkout
+    st = status
+    ci = commit
+[commit]
+	template = /Users/robert.vandell/.stCommitMsg
+[diff]
+    renameLimit = 1920
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/robert.vandell/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[credential]
+	helper = osxkeychain
+#[http]
+#	sslVerify = false
