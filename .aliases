@@ -2,23 +2,7 @@
 alias ls='ls -lhAGo'
 
 # Git Repos Dir
-alias grs="cd /var/www/git-repos"
-alias grrs="cd ~/git-repos"
-
-# CK Aliases
-alias ckvm='grs && cd ckvm'
-alias cs='grs && cd cs'
-alias misc='grs && cd misc'
-alias salt='grs && cd ck_salt'
-alias idl='grs && cd con_idl'
-
-# AdMAX Aliases
-alias admax='cs && cd admax'
-alias ap='admax && cd admax-platform'
-alias bq='grs && cd burger-queen-php'
-
-# PSR Fixer
-alias psr='~/bin/psr-fixer.sh'
+alias grs="cd ~/git-repos"
 
 # Git Aliases
 alias gf='gfa'
@@ -26,38 +10,8 @@ alias gr='git_refresh_all'
 alias gd='git_delete_branch develop'
 alias gdm='git_delete_branch master'
 alias gds='git_delete_branch stable'
-#alias php='docker run --rm -it -v $(pwd):/app registry.corp.creditkarma.com/bob/php:5.6-with-zmq'
-alias composer='docker run --rm -it -e COMPOSER_ALLOW_SUPERUSER=1 --volumes-from=composer_volume -v $(pwd):/app registry.corp.creditkarma.com/bob/composer:no-composer-user' 
-alias gpr='get_pr'
 alias dev='git co -q develop'
-alias gch="git lg -n 1 | sed 's/^\* [0-9a-f]* //' | pbcopy"
-
-# Credit Ecosystem
-alias ce="grs && cd credit-ecosystem"
-alias fasv2='ce && cd financial-accounts-scala-service'
-alias fasv1='ce && cd financial-accounts-service'
-alias cdl='ce && cd credit-ecosystem-libraries'
-alias cel='cdl'
-alias tugi='ce && cd transunion-gateway-identity-service'
-alias tugr='ce && cd transunion-gateway-report-service'
-alias efgr='ce && cd equifax-gateway-report-service'
-alias crsv2='ce && cd credit-report-service'
-alias income='ce && cd income-service'
-alias cci='ce && cd circleci'
-alias mps='ce && cd member-profiles-service'
-alias plaid='ce && cd plaid-gateway-service'
-alias cambr='ce && cd cambr-gateway-service'
-
-# DNS Manipulation
-alias dns-dir="cd '/Library/Application Support/OpenDNS Roaming Client/'"
-alias dns-on='turn_dns_on'
-alias dns-off='turn_dns_off'
-
-# SBT
-alias sbt='SBT_OPTS="-Xms512M -Xmx1024M -Xss2M -XX:MaxMetaspaceSize=1024M" sbt'
-
-# Maestro Template Migration
-alias temp='grs && cd maes_template-manager'
 
 # Banker Scala
 alias banker='cd ~/git-repos/banker-scala'
+
