@@ -1,18 +1,22 @@
-function chrome {
-    /usr/bin/open -a /Applications/Google\ Chrome.app $1
+function nope {
+    echo "-- Nope: $1 --"
 }
 
 function git_fetch_all {
     echo "Refreshing..."
 
-    gfa --tags -q
+    git fetch --all --prune
 }
 
 function refresh_branch {
-    echo "Updating $1..."
-
     git co -q $1
-    git pull -q
+
+    if [[ $(git branch -r | grep -E "^  origin/$1$" | wc -l) -gt 0 ]]; then
+        echo "Updating $1..."
+        git pull -q
+    else
+        nope "$1 does not exist remotely, moving on."
+    fi
 }
 
 function git_refresh_all_but_current {
@@ -53,3 +57,6 @@ function git_delete_branch {
     git branch -D $current
 }
 
+function chrome {
+  open -a "Google Chrome" $1
+}
