@@ -5,13 +5,13 @@ alias ls='ls -lhAGo'
 alias grs="cd ~/git-repos"
 
 # Git Aliases
-alias gf='gfa'
+alias gf='gfa -p -P'
 alias gr='git_refresh_all'
 alias gd='git_delete_branch develop'
 alias gdm='git_delete_branch master'
+alias gdma='git_delete_branch main'
 alias gds='git_delete_branch stable'
 alias dev='git co -q develop'
-
-# Banker Scala
-alias banker='cd ~/git-repos/banker-scala'
+alias amend='git commit -a --amend -C HEAD --no-verify'
+alias gbc='git branch | cat'
 
