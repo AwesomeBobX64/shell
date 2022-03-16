@@ -3,5 +3,5 @@
 .settings
 .project
 .buildpath
-**/*.orig
+*/*.orig
 .idea/

@@ -1,12 +1,12 @@
 [core]
     editor = vi
 [user]
-	name = Bob Van Dell
-	email = awesomebobx64@gmail.com
+    name = Bob Van Dell
+    email = awesomebobx64@gmail.com
 [merge]
     tool = opendiff
 [push]
-	default = current
+    default = current
 [pull]
     rebase = true
 [rerere]
@@ -19,7 +19,13 @@
     co = checkout
     st = status
     ci = commit
+    pu = push -u
 [diff]
     renameLimit = 1920
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

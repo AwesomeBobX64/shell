@@ -3,6 +3,7 @@ alias ls='ls -lhAGo'
 
 # Git Repos Dir
 alias grs="cd ~/git-repos"
+alias dev="cd ~/dev"
 
 # Git Aliases
 alias gf='gfa -p -P'
@@ -11,7 +12,6 @@ alias gd='git_delete_branch develop'
 alias gdm='git_delete_branch master'
 alias gdma='git_delete_branch main'
 alias gds='git_delete_branch stable'
-alias dev='git co -q develop'
 alias amend='git commit -a --amend -C HEAD --no-verify'
 alias gbc='git branch | cat'
 

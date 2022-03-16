@@ -5,7 +5,7 @@ function nope {
 function git_fetch_all {
     echo "Refreshing..."
 
-    git fetch --all --prune
+    git fetch --tags --prune origin
 }
 
 function refresh_branch {
