@@ -11,7 +11,7 @@ function git_fetch_all {
 function refresh_branch {
     git co -q $1
 
-    if [[ $(git branch -r | grep -E "^  origin/$1$" | wc -l) -gt 0 ]]; then
+    if [[ $(git branch -r | grep -E "^  origin/$1$" -c) -gt 0 ]]; then
         echo "Updating $1..."
         git pull -q
     else
