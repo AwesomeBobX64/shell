@@ -1,13 +1,16 @@
+# Called to output a message when something is not as expected.
 function nope {
     echo "-- Nope: $1 --"
 }
 
+# Fetches all branches and tags, as well as pruning local tags no longer present on the remote "origin"
 function git_fetch_all {
     echo "Refreshing..."
 
     git fetch --tags --prune origin
 }
 
+# Reused function that silently checks out a branch that exists locally and updates it with the remote "origin"
 function refresh_branch {
     git co -q $1
 
@@ -19,6 +22,7 @@ function refresh_branch {
     fi
 }
 
+# Refreshes all but the current branch. Used by git_refresh_all to ensure the last branch updated is current
 function git_refresh_all_but_current {
     # Refresh branches and tags, pruning as well
     git_fetch_all
@@ -30,6 +34,7 @@ function git_refresh_all_but_current {
     done
 }
 
+# Refreshes all branches, but saves the current one for last to leave us right back where we started, but with updated branches.
 function git_refresh_all {
     current=$(current_branch)
 
@@ -38,16 +43,7 @@ function git_refresh_all {
     refresh_branch $current
 }
 
-function get_pr {
-    message=$(git push -u 2>&1)
-
-    if [ $? -eq 0 ]; then
-        chrome $(git remote -v | grep '(push)' | awk '{print $2 }' | sed -E 's/.git//')"/compare/"$(current_branch)
-    else
-        echo $message
-    fi
-}
-
+# Deletes the current branch, switches to a mainline provided as $1, refreshes all branches (except current), and then deletes the local copy of the current branch
 function git_delete_branch {
     current=$(current_branch)
 
@@ -55,8 +51,4 @@ function git_delete_branch {
 
     git co -q $1
     git branch -D $current
-}
-
-function chrome {
-  open -a "Google Chrome" $1
 }
