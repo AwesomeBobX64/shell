@@ -8,10 +8,6 @@ alias dev="cd ~/dev"
 # Git Aliases
 alias gf='gfa -p -P'
 alias gr='git_refresh_all'
-alias gd='git_delete_branch develop'
-alias gdm='git_delete_branch master'
-alias gdma='git_delete_branch main'
-alias gds='git_delete_branch stable'
+alias gd='git_delete_branch $(default_branch)'
 alias amend='git commit -a --amend -C HEAD --no-verify'
-alias gbc='git branch | cat'
 

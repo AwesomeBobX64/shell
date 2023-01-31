@@ -16,7 +16,7 @@ function refresh_branch {
 
     if [[ $(git branch -r | grep -E "^  origin/$1$" -c) -gt 0 ]]; then
         echo "Updating $1..."
-        git pull -q
+        git pull -q --recurse-submodules
     else
         nope "$1 does not exist remotely, moving on."
     fi
@@ -51,4 +51,12 @@ function git_delete_branch {
 
     git co -q $1
     git branch -D $current
+}
+
+function git_default_branch {
+    git config --get branch.default
+}
+
+function default_branch {
+    git_default_branch
 }
