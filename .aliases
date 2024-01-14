@@ -10,4 +10,9 @@ alias gf='gfa -p -P'
 alias gr='git_refresh_all'
 alias gd='git_delete_branch $(default_branch)'
 alias amend='git commit -a --amend -C HEAD --no-verify'
+alias gbc='git branch | cat'
+
+# Terraform
+alias tf='terraform'
+alias tg='terragrunt'
 
