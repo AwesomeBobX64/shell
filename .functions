@@ -27,30 +27,30 @@ function git_refresh_all_but_current {
     # Refresh branches and tags, pruning as well
     git_fetch_all
 
-    current_branch=$(current_branch)
+    CURRENT_BRANCH=$(git_current_branch)
 
-    for branch in $(git branch | grep -v $current_branch); do
+    for branch in $(git branch | grep -v "${CURRENT_BRANCH}"); do
         refresh_branch $branch
     done
 }
 
 # Refreshes all branches, but saves the current one for last to leave us right back where we started, but with updated branches.
 function git_refresh_all {
-    current=$(current_branch)
+    CURRENT_BRANCH=$(git_current_branch)
 
     git_refresh_all_but_current
 
-    refresh_branch $current
+    refresh_branch "${CURRENT_BRANCH}"
 }
 
 # Deletes the current branch, switches to a mainline provided as $1, refreshes all branches (except current), and then deletes the local copy of the current branch
 function git_delete_branch {
-    current=$(current_branch)
+    CURRENT_BRANCH=$(git_current_branch)
 
     git_refresh_all_but_current
 
     git co -q $1
-    git branch -D $current
+    git branch -D "${CURRENT_BRANCH}"
 }
 
 function git_default_branch {
@@ -60,3 +60,13 @@ function git_default_branch {
 function default_branch {
     git_default_branch
 }
+
+function rebase_main {
+    git co main && git pull && git co - && git rebase main
+}
+
+# Outputs a bash bell
+function ding {
+    echo -e "\a"
+}
+
